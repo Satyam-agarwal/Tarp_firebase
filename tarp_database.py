@@ -22,25 +22,24 @@ fixed_interval = 10
 
 while 1:
        parking_c= s.readline()
-       print s.readline().split()
-       for name in s.readline().split(): 
-       	   
-           if (name.find("Amount")):
+       parking_c1= s.readline()
+       parking_c2= s.readline()
+       
+       
       
-              print "hi"
-      #current time and date
-	   time_hhmmss = time.strftime('%H:%M:%S')
-	   date_mmddyyyy = time.strftime('%d/%m/%Y')
+    
+       time_hhmmss = time.strftime('%H:%M:%S')
+       date_mmddyyyy = time.strftime('%d/%m/%Y')
 	    
 	    #current location name
-	   parking_location = 'Vellore';
-	   print parking_c + ',' + time_hhmmss + ',' + date_mmddyyyy + ',' + parking_location
+       parking_location = 'Vellore';
+       print parking_c + ',' + time_hhmmss + ',' + date_mmddyyyy + ',' + parking_location
 	    
-	    #insert record
-	   data = {'date':date_mmddyyyy,'time':time_hhmmss,'value':parking_c}
-	   result = requests.post(firebase_url + '/' + parking_location + '/parking.json', data=json.dumps(data))
-	    
-	   print 'Record inserted. Result Code = ' + str(result.status_code) + ',' + result.text
+       	    #insert record
+       data = {'time':time_hhmmss,'Slot2':parking_c[11:],"Slot3":parking_c1[11:],"Slot1":parking_c2[11:]}
+       result = requests.post(firebase_url + '/' + parking_location + '/parking.json', data=json.dumps(data))
+       time.sleep(10)	    
+       print 'Record inserted. Result Code = ' + str(result.status_code) + ',' + result.text
 	   
 	 
 
